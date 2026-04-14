@@ -89,13 +89,13 @@ phoenix <- function(pf_ratio, sf_ratio, imv, other_respiratory_support,
   cl <- as.list(match.call())
   cl[["data"]] <- NULL
 
-  cl[[1]] <- quote(phoenix_respiratory)
+  cl[[1]] <- get("phoenix_respiratory", mode = "function")
   resp <- eval(as.call(cl), envir = data, enclos = parent.frame())
-  cl[[1]] <- quote(phoenix_cardiovascular)
+  cl[[1]] <- get("phoenix_cardiovascular", mode = "function")
   card <- eval(as.call(cl), envir = data, enclos = parent.frame())
-  cl[[1]] <- quote(phoenix_coagulation)
+  cl[[1]] <- get("phoenix_coagulation", mode = "function")
   coag <- eval(as.call(cl), envir = data, enclos = parent.frame())
-  cl[[1]] <- quote(phoenix_neurologic)
+  cl[[1]] <- get("phoenix_neurologic", mode = "function")
   neur <- eval(as.call(cl), envir = data, enclos = parent.frame())
 
   rtn <-
