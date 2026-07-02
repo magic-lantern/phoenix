@@ -319,7 +319,7 @@ def phoenix8(pf_ratio = np.nan, sf_ratio = np.nan, imv = np.nan, other_respirato
         platelets : numeric vector for platelets counts in units of 1,000/uL
                     (thousand per microliter)
 
-        inr : numeric vector for the international normalied ratio blood test
+        inr : numeric vector for the international normalised ratio blood test
 
         d_dimer : numeric vector for D-Dimer, units of mg/L FEU
 
