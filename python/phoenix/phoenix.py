@@ -14,7 +14,7 @@ def map(sbp, dbp):
     Returns:
         a np.array
     """
-    return(np.array(2/3 * dbp + 1/3 * sbp))
+    return np.array(2/3 * dbp + 1/3 * sbp)
 
 def phoenix_respiratory(pf_ratio = np.nan, sf_ratio = np.nan, imv = np.nan, other_respiratory_support = np.nan):
     """
@@ -53,7 +53,7 @@ def phoenix_respiratory(pf_ratio = np.nan, sf_ratio = np.nan, imv = np.nan, othe
           ors.astype(int) * (((pfr < 400) | (sfr < 292)).astype(int))
           )
 
-    return(np.array(rtn))
+    return np.array(rtn)
 
 def phoenix_cardiovascular(vasoactives = np.nan, lactate = np.nan, age = np.nan, map = np.nan):
     """
@@ -95,7 +95,7 @@ def phoenix_cardiovascular(vasoactives = np.nan, lactate = np.nan, age = np.nan,
             ((age >= 144) & (age <= 216)).astype(int) * ((map < 38).astype(int) + (map < 52).astype(int))
     )
 
-    return(np.array(vas_score + lct_score + map_score))
+    return np.array(vas_score + lct_score + map_score)
 
 def phoenix_coagulation(platelets = np.nan, inr = np.nan, d_dimer = np.nan, fibrinogen = np.nan):
     """
@@ -125,7 +125,7 @@ def phoenix_coagulation(platelets = np.nan, inr = np.nan, d_dimer = np.nan, fibr
 
     rtn = np.minimum(2, rtn)
 
-    return(np.array(rtn))
+    return np.array(rtn)
 
 def phoenix_neurologic(gcs = np.nan, fixed_pupils = np.nan):
     """
@@ -146,7 +146,7 @@ def phoenix_neurologic(gcs = np.nan, fixed_pupils = np.nan):
 
     rtn = np.minimum(2, rtn)
 
-    return(np.array(rtn))
+    return np.array(rtn)
 
 def phoenix_endocrine(glucose = np.nan):
     """
@@ -159,7 +159,7 @@ def phoenix_endocrine(glucose = np.nan):
         A np.array of integer values
     """
     glc = np.nan_to_num(glucose, nan = 100)
-    return( np.array(((glc < 50) | (glc > 150)).astype(int)))
+    return np.array(((glc < 50) | (glc > 150)).astype(int))
 
 def phoenix_immunologic(anc = np.nan, alc = np.nan):
     """
@@ -177,7 +177,7 @@ def phoenix_immunologic(anc = np.nan, alc = np.nan):
     """
     anc = np.nan_to_num(anc, nan = 555)
     alc = np.nan_to_num(alc, nan = 1111)
-    return(np.array(((anc < 0.500) | (alc < 1.000)).astype(int)))
+    return np.array(((anc < 0.500) | (alc < 1.000)).astype(int))
 
 def phoenix_renal(creatinine = np.nan, age = np.nan):
     """
@@ -201,7 +201,7 @@ def phoenix_renal(creatinine = np.nan, age = np.nan):
             ((age >=  60) & (age <  144)).astype(int) * (crt >= 0.7).astype(int) +
             ((age >= 144) & (age <= 216)).astype(int) * (crt >= 1.0).astype(int)
           )
-    return(np.array(rtn))
+    return np.array(rtn)
 
 def phoenix_hepatic(bilirubin = np.nan, alt = np.nan):
     """
@@ -217,7 +217,7 @@ def phoenix_hepatic(bilirubin = np.nan, alt = np.nan):
     """
     bil = np.nan_to_num(bilirubin, nan = 0)
     alt = np.nan_to_num(alt, nan = 0)
-    return( np.array(((bil >= 4) | (alt > 102)).astype(int)))
+    return np.array(((bil >= 4) | (alt > 102)).astype(int))
 
 def phoenix(pf_ratio = np.nan, sf_ratio = np.nan, imv = np.nan, other_respiratory_support = np.nan, vasoactives = np.nan, lactate = np.nan, map = np.nan, platelets = np.nan, inr = np.nan, d_dimer = np.nan, fibrinogen = np.nan, gcs = np.nan, fixed_pupils = np.nan, age = np.nan):
     """
@@ -282,7 +282,7 @@ def phoenix(pf_ratio = np.nan, sf_ratio = np.nan, imv = np.nan, other_respirator
     septic_shock = ((total > 1) & (card > 0)).astype(int)
     rtn = pd.DataFrame(data = np.column_stack((resp, card, coag, neur, total, sepsis, septic_shock)))
     rtn.columns = ["phoenix_respiratory_score", "phoenix_cardiovascular_score", "phoenix_coagulation_score", "phoenix_neurologic_score", "phoenix_sepsis_score", "phoenix_sepsis", "phoenix_septic_shock"]
-    return(rtn)
+    return rtn
 
 def phoenix8(pf_ratio = np.nan, sf_ratio = np.nan, imv = np.nan, other_respiratory_support = np.nan, vasoactives = np.nan, lactate = np.nan, map = np.nan, platelets = np.nan, inr = np.nan, d_dimer = np.nan, fibrinogen = np.nan, gcs = np.nan, fixed_pupils = np.nan, glucose = np.nan, anc = np.nan, alc = np.nan, creatinine = np.nan, bilirubin = np.nan, alt = np.nan, age = np.nan):
     """
@@ -319,7 +319,7 @@ def phoenix8(pf_ratio = np.nan, sf_ratio = np.nan, imv = np.nan, other_respirato
         platelets : numeric vector for platelets counts in units of 1,000/uL
                     (thousand per microliter)
 
-        inr : numeric vector for the international normalised ratio blood test
+        inr : numeric vector for the international normalied ratio blood test
 
         d_dimer : numeric vector for D-Dimer, units of mg/L FEU
 
@@ -365,7 +365,7 @@ def phoenix8(pf_ratio = np.nan, sf_ratio = np.nan, imv = np.nan, other_respirato
     total8 = total + endo + immu + renal + hepatic
     rtn = pd.DataFrame(data = np.column_stack((resp, card, coag, neur, total, sepsis, septic_shock, endo, immu, renal, hepatic, total8)))
     rtn.columns = ["phoenix_respiratory_score", "phoenix_cardiovascular_score", "phoenix_coagulation_score", "phoenix_neurologic_score", "phoenix_sepsis_score", "phoenix_sepsis", "phoenix_septic_shock", "phoenix_endocrine_score", "phoenix_immunologic_score", "phoenix_renal_score", "phoenix_hepatic_score", "phoenix8_sepsis_score"]
-    return(rtn)
+    return rtn
 
 
 ################################################################################
