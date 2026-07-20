@@ -1,3 +1,10 @@
+# Version 1.1.3.9000
+
+## Bug Fixes
+
+* Use `get()` instead of `quote()` so that the methods will work when the
+  namespace is load and not attached. (#20)
+
 # Version 1.1.3:
 
 * Spelling and grammar fixes in the documentation for the R, python, and
